@@ -1,12 +1,3 @@
-//
-//  main.cpp
-//  Labyrinth-Game
-//
-//  Created by Hakan KOCAK on 1.01.2020.
-//  Copyright © 2020 Hakan KOCAK. All rights reserved.
-//
-
-#include <iostream>
 #include <SFML/Graphics.hpp>
 
 using namespace sf;

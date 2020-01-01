@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3971B34323BD099800BE83C7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3971B34223BD099800BE83C7 /* main.cpp */; };
+		3971B34323BD099800BE83C7 /* labyrinthGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3971B34223BD099800BE83C7 /* labyrinthGame.cpp */; };
 		3971B35023BD0A0C00BE83C7 /* sfml-audio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3971B34A23BD0A0C00BE83C7 /* sfml-audio.framework */; };
 		3971B35123BD0A0C00BE83C7 /* sfml-network.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3971B34B23BD0A0C00BE83C7 /* sfml-network.framework */; };
 		3971B35223BD0A0C00BE83C7 /* sfml-graphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3971B34C23BD0A0C00BE83C7 /* sfml-graphics.framework */; };
@@ -30,7 +30,7 @@
 
 /* Begin PBXFileReference section */
 		3971B33F23BD099800BE83C7 /* Labyrinth-Game */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Labyrinth-Game"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3971B34223BD099800BE83C7 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		3971B34223BD099800BE83C7 /* labyrinthGame.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = labyrinthGame.cpp; sourceTree = "<group>"; };
 		3971B34A23BD0A0C00BE83C7 /* sfml-audio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-audio.framework"; path = "../../../../../../Library/Frameworks/sfml-audio.framework"; sourceTree = "<group>"; };
 		3971B34B23BD0A0C00BE83C7 /* sfml-network.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-network.framework"; path = "../../../../../../Library/Frameworks/sfml-network.framework"; sourceTree = "<group>"; };
 		3971B34C23BD0A0C00BE83C7 /* sfml-graphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-graphics.framework"; path = "../../../../../../Library/Frameworks/sfml-graphics.framework"; sourceTree = "<group>"; };
@@ -76,7 +76,7 @@
 		3971B34123BD099800BE83C7 /* Labyrinth-Game */ = {
 			isa = PBXGroup;
 			children = (
-				3971B34223BD099800BE83C7 /* main.cpp */,
+				3971B34223BD099800BE83C7 /* labyrinthGame.cpp */,
 			);
 			path = "Labyrinth-Game";
 			sourceTree = "<group>";
@@ -150,7 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3971B34323BD099800BE83C7 /* main.cpp in Sources */,
+				3971B34323BD099800BE83C7 /* labyrinthGame.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
