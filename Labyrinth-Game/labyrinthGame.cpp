@@ -3,7 +3,6 @@
 #include "player.hpp"
 #include "textureHolder.hpp"
 #include "labyrinthGame.hpp"
-#include "wall.hpp"
 
 using namespace sf;
 
@@ -50,19 +49,13 @@ int main(int argc, const char * argv[]) {
     // Load the texture for our background vertex array
     Texture textureBackground = TextureHolder::GetTexture("../Resources/graphics/floor_tile.png");
     
+    //Walls
     std::vector<Wall> wallArray;
     std::vector<Wall>::const_iterator wallIterator;
-    Wall wall;
-
-    int counter = 0;
     
-    while(counter < 25){
-        wall.setPosition(100 * counter, 2000);
-        wallArray.push_back(wall);
-        
-        counter++;
-    }
-    
+    //Gates
+    std::vector<Gate> gateArray;
+    std::vector<Gate>::const_iterator gateIterator;
     
     // Hide the mouse pointer and replace it with crosshair
     window.setMouseCursorVisible(false);
@@ -137,15 +130,15 @@ int main(int argc, const char * argv[]) {
                     clock.restart();
                 } else if (event.key.code == Keyboard::Return && state == State::GAME_OVER){
                 
-                    arena.width = 500 * 5;
-                    arena.height = 500 * 5;
+                    arena.width = 2200;
+                    arena.height = 2700;
                     arena.left = 0;
                     arena.top = 0;
                     
                     // Pass the vertex array by reference
                     // to the createBackground function
                     int tileSize = createBackground(background, arena);
-                    
+                    createWallsAndGates(wallArray, gateArray);
     
                     // Reset the player's stats
                     player.resetPlayerStats();
@@ -258,9 +251,16 @@ int main(int argc, const char * argv[]) {
             window.draw(background, &textureBackground);
             
             //Draw the walls
-            counter = 0;
+            int counter = 0;
             for(wallIterator = wallArray.begin(); wallIterator != wallArray.end(); wallIterator++){
                 window.draw(wallArray[counter].getSprite());
+                counter++;
+            }
+            
+            //Draw the gate
+            counter = 0;
+            for(gateIterator = gateArray.begin(); gateIterator != gateArray.end(); gateIterator++){
+                window.draw(gateArray[counter].getSprite());
                 counter++;
             }
           

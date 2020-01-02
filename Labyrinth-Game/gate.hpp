@@ -1,0 +1,43 @@
+//
+//  gate.hpp
+//  Labyrinth-Game
+//
+//  Created by Hakan KOCAK on 2.01.2020.
+//  Copyright © 2020 Hakan KOCAK. All rights reserved.
+//
+
+#ifndef gate_hpp
+#define gate_hpp
+
+#include <SFML/Graphics.hpp>
+
+using namespace sf;
+
+class Gate{
+    
+private:
+    //Position
+    Vector2f m_Position;
+    
+    Sprite m_Sprite;
+    Texture m_Texture;
+    int m_gateNumber;
+    bool m_isOpen = false;
+    
+public:
+    
+    Gate();
+    
+    // Send a copy of the sprite to main
+    Sprite getSprite();
+    
+    void setPosition(int x, int y);
+    
+    void setGateNumber(int num);
+    int getGateNumber();
+    
+    void openTheGate();
+    bool isGateOpen();
+};
+
+#endif /* gate_hpp */

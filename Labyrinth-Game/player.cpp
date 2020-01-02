@@ -26,8 +26,8 @@ Player::Player(){
 void Player::spawn(IntRect arena, Vector2f resolution, int tileSize) {
     // Place the player in the middle of the arena
     std::cout << "Width: " << arena.width << " Height: " << arena.height;
-    m_Position.x = -1 * arena.width;
-    m_Position.y = arena.height;
+    m_Position.x = 1000;
+    m_Position.y = 1000;
     
     // Copy the details of the arena to the player's m_Arena
     m_Arena.left = arena.left;
