@@ -28,18 +28,9 @@ private:
     
     // What is the screen resolution
     Vector2f m_Resolution;
-    
-    // What size is the current arena
-    IntRect m_Arena;
-    
+   
     // How big is each tile of the arena
     int m_TileSize;
-    
-    // Which directions is the player currently moving in
-    bool m_UpPressed;
-    bool m_DownPressed;
-    bool m_LeftPressed;
-    bool m_RightPressed;
     
     // How much health has the player got?
     int m_Health;
@@ -54,7 +45,17 @@ public:
     
     Player();
     
-    void spawn(IntRect arena, Vector2f resolution, int tileSize);
+    // Which directions is the player currently moving in
+    int m_Direction = 0; // 1 = Up, 2 = Down, 3 = Left, 4 = Right
+    
+    //Check if player can move to the given direction
+    bool m_CanMoveUp = true;
+    bool m_CanMoveLeft = true;
+    bool m_CanMoveDown = true;
+    bool m_CanMoveRight = true;
+    
+    
+    void spawn(Vector2f resolution, int tileSize);
     
     // Call this at the end of every game
     void resetPlayerStats();
@@ -80,37 +81,15 @@ public:
     // How much health has the player currently got?
     int getHealth();
     
-    // The next four functions move the player
-    void moveLeft();
-    
-    void moveRight();
-    
-    void moveUp();
-    
-    void moveDown();
-    
-    // Stop the player moving in a specific direction
-    void stopLeft();
-    
-    void stopRight();
-    
-    void stopUp();
-    
-    void stopDown();
-    
     // We will call this function once every frame
-    void update(float elapsedTime, Vector2i mousePosition);
-    
-    // Give player a speed boost
-    void upgradeSpeed();
+    void update(Vector2i mousePosition);
+    void updateMovement(float elapsedTime);
     
     // Give the player some health
     void upgradeHealth();
     
     // Increase the maximum amount of health the player can have
     void increaseHealthLevel(int amount);
-    
-    
 };
 
 

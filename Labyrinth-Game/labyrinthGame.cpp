@@ -144,7 +144,7 @@ int main(int argc, const char * argv[]) {
                     player.resetPlayerStats();
                     
                     // Spawn the player to the left bottom corner of the arena
-                    player.spawn(arena, resolution, tileSize);
+                    player.spawn(resolution, tileSize);
                     state = State::PLAYING;
                     
                     // Reset the clock so there isn't a frame jump
@@ -162,35 +162,37 @@ int main(int argc, const char * argv[]) {
             window.close();
         }
         
-        // Handle controls while playing
         if (state == State::PLAYING)
         {
-            // Handle the pressing and releasing of the WASD keys
-            if (Keyboard::isKeyPressed(Keyboard::W)){
-                player.moveUp();
-            }  else {
-                player.stopUp();
+            int counter = 0;
+            for(wallIterator = wallArray.begin(); wallIterator != wallArray.end(); wallIterator++){
+                if (player.getPosition().intersects(wallArray[counter].getPosition())){
+                    //Up
+                    if (player.m_Direction == 1){
+                        player.m_CanMoveUp = false;
+                        
+                        //Bounce back the player a bit.
+                        player.getSprite().move(0, -200);
+                    }
+                    //Down
+                    else if (player.m_Direction == 2){
+                        player.m_CanMoveDown = false;
+                        player.getSprite().move(0, 200);
+                    }
+                    //Left
+                    else if (player.m_Direction == 3){
+                        player.m_CanMoveLeft = false;
+                        player.getSprite().move(200, 0);
+                    }
+                    //Right
+                    else if (player.m_Direction == 4){
+                        player.m_CanMoveRight = false;
+                        player.getSprite().move(-200, 0);
+                    }
+                }
+                counter ++;
             }
-            
-            if (Keyboard::isKeyPressed(Keyboard::S)){
-                player.moveDown();
-            } else {
-                player.stopDown();
-            }
-            
-            if (Keyboard::isKeyPressed(Keyboard::A)) {
-                player.moveLeft();
-            } else{
-                player.stopLeft();
-            }
-            
-            if (Keyboard::isKeyPressed(Keyboard::D)){
-                player.moveRight();
-            } else  {
-                player.stopRight();
-            }
-            
-        }// End WASD while playing
+        }
         
         /*
          ****************
@@ -222,7 +224,8 @@ int main(int argc, const char * argv[]) {
             
             
             // Update the player
-            player.update(dtAsSeconds, Mouse::getPosition());
+            player.update(Mouse::getPosition());
+            player.updateMovement(dtAsSeconds);
             
             // Make a note of the players new position
             Vector2f playerPosition(player.getCenter());

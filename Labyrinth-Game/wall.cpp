@@ -23,6 +23,10 @@ Sprite Wall::getSprite()
     return m_Sprite;
 }
 
+FloatRect Wall::getPosition(){
+    return m_Sprite.getGlobalBounds();
+}
+
 void Wall::setPosition(int x, int y){
     m_Sprite.setPosition(x, y);
 }
