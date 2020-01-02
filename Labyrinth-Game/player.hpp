@@ -1,11 +1,3 @@
-//
-//  player.hpp
-//  Labyrinth-Game
-//
-//  Created by Hakan KOCAK on 2.01.2020.
-//  Copyright © 2020 Hakan KOCAK. All rights reserved.
-//
-
 #ifndef player_hpp
 #define player_hpp
 
@@ -87,9 +79,6 @@ public:
     
     // Give the player some health
     void upgradeHealth();
-    
-    // Increase the maximum amount of health the player can have
-    void increaseHealthLevel(int amount);
 };
 
 

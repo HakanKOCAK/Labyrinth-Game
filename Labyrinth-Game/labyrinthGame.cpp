@@ -1,6 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <sstream>
+#include <fstream>
 #include "player.hpp"
+#include "bullet.hpp"
 #include "textureHolder.hpp"
 #include "labyrinthGame.hpp"
 
@@ -66,9 +69,27 @@ int main(int argc, const char * argv[]) {
                              64.0f / spriteCrosshair.getLocalBounds().height);
     spriteCrosshair.setOrigin(25, 25);
     
+    Bullet bullets[100];
+    int currentBullet = 0;
+    int bulletsSpare = 24;
+    int bulletsInClip = 6;
+    int clipSize = 6;
+    float fireRate = 1;
+    // When was the fire button last pressed?
+    Time lastPressed;
+    
+    
+    
     // Create a view for the HUD
     View hudView(FloatRect(0, 0, resolution.x, resolution.y));
     
+    
+    // Create a sprite for the ammo icon
+    Sprite spriteAmmoIcon;
+    Texture textureAmmoIcon = TextureHolder::GetTexture("../Resources/graphics/bullet.png");
+    spriteAmmoIcon.setTexture(textureAmmoIcon);
+    spriteAmmoIcon.setScale(80.0f / spriteAmmoIcon.getLocalBounds().width, 80.0f / spriteAmmoIcon.getLocalBounds().height);
+    spriteAmmoIcon.setPosition(70, resolution.y-200);
     
     // Load the font
     Font font;
@@ -96,6 +117,12 @@ int main(int argc, const char * argv[]) {
     gameOverText.setOrigin(gameOverRect.left+gameOverRect.width/2.0f, gameOverRect.top+gameOverRect.height/2.0f);
     gameOverText.setPosition(resolution.x/2, resolution.y/2);
     
+    // Ammo
+    Text ammoText;
+    ammoText.setFont(font);
+    ammoText.setCharacterSize(55);
+    ammoText.setFillColor(Color::White);
+    ammoText.setPosition(200, resolution.y-200);
     
     // Health bar
     RectangleShape healthBar;
@@ -107,17 +134,10 @@ int main(int argc, const char * argv[]) {
     int framesSinceLastHUDUpdate = 0;
     
     // How often (in frames) should we update the HUD
-    int fpsMeasurementFrameInterval = 1000;
-    
+    int fpsMeasurementFrameInterval = 500;
     
     // The main game loop
     while (window.isOpen()) {
-        /*
-         ************
-         Handle input
-         ************
-         */
-        
         // Handle events
         Event event;
         while (window.pollEvent(event)){
@@ -130,6 +150,7 @@ int main(int argc, const char * argv[]) {
                     clock.restart();
                 } else if (event.key.code == Keyboard::Return && state == State::GAME_OVER){
                 
+                    state = State::PLAYING;
                     arena.width = 2200;
                     arena.height = 2700;
                     arena.left = 0;
@@ -140,12 +161,18 @@ int main(int argc, const char * argv[]) {
                     int tileSize = createBackground(background, arena);
                     createWallsAndGates(wallArray, gateArray);
     
+                    // Prepare the gun and ammo for next game
+                    currentBullet = 0;
+                    bulletsSpare = 24;
+                    bulletsInClip = 6;
+                    clipSize = 6;
+                    fireRate = 1;
+                    
                     // Reset the player's stats
                     player.resetPlayerStats();
                     
                     // Spawn the player to the left bottom corner of the arena
                     player.spawn(resolution, tileSize);
-                    state = State::PLAYING;
                     
                     // Reset the clock so there isn't a frame jump
                     clock.restart();
@@ -192,6 +219,36 @@ int main(int argc, const char * argv[]) {
                 }
                 counter ++;
             }
+            
+            // Fire a bullet
+            if (Mouse::isButtonPressed(Mouse::Left)) {
+                
+                if (gameTimeTotal.asMilliseconds()
+                    - lastPressed.asMilliseconds()
+                    > 1000 / fireRate && bulletsInClip > 0) {
+                    
+                    // Pass the centre of the player and the centre of the cross-hair
+                    // to the shoot function
+                    //bullets[currentBullet].shoot(
+                    //                             player.getCenter().x, player.getCenter().y,
+                    //                             mouseWorldPosition.x, mouseWorldPosition.y);
+                    
+                    // if working on iMac Retina comment out above and uncomment below
+                    bullets[currentBullet].shoot(
+                                                 player.getCenter().x, player.getCenter().y,
+                                                 mouseWorldPosition.x, mouseWorldPosition.y - resolution.y);
+                    
+                    
+                    currentBullet++;
+                    if (currentBullet > 99) {
+                        currentBullet = 0;
+                    }
+                    lastPressed = gameTimeTotal;
+                    
+                    bulletsInClip--;
+                }
+                
+            }// End fire a bullet
         }
         
         /*
@@ -233,6 +290,46 @@ int main(int argc, const char * argv[]) {
             // Make the view centre around the player
             mainView.setCenter(player.getCenter());
             
+            // Update any bullets that are in-flight
+            for (int i = 0; i < 100; i++) {
+                if (bullets[i].isInFlight()) {
+                    bullets[i].update(dtAsSeconds);
+                }
+            }
+            
+            
+            //Check the collision between bullets and walls
+            for (int i = 0; i < 100; i++)
+            {
+                for (int j = 0; j < wallArray.size(); j++)
+                {
+                    if (bullets[i].isInFlight()){
+                        if (bullets[i].getPosition().intersects(wallArray[j].getPosition())){
+                             bullets[i].stop();
+                        }
+                    }
+                }
+            }
+            
+            // size up the health bar
+            healthBar.setSize(Vector2f(player.getHealth() * 3, 70));
+            
+            // Increment the number of frames since the last HUD calculation
+            framesSinceLastHUDUpdate++;
+            // Calculate FPS every fpsMeasurementFrameInterval frames
+            if (framesSinceLastHUDUpdate > fpsMeasurementFrameInterval) {
+                
+                // Update game HUD text
+                std::stringstream ssAmmo;
+                
+                // Update the ammo text
+                ssAmmo << bulletsInClip << "/" << bulletsSpare;
+                ammoText.setString(ssAmmo.str());
+                
+                framesSinceLastHUDUpdate = 0;
+                
+            } // End HUD Update
+            
         }// End updating the scene
         
        
@@ -267,6 +364,11 @@ int main(int argc, const char * argv[]) {
                 counter++;
             }
           
+            for (int i = 0; i < 100; i++) {
+                if (bullets[i].isInFlight()) {
+                    window.draw(bullets[i].getShape());
+                }
+            }
             
             // Draw the player
             window.draw(player.getSprite());
@@ -277,6 +379,10 @@ int main(int argc, const char * argv[]) {
             // Switch to the HUD view
             window.setView(hudView);
             
+            // Draw all the HUD elements
+            window.draw(spriteAmmoIcon);
+            window.draw(ammoText);
+            window.draw(healthBar);
         }
         
         

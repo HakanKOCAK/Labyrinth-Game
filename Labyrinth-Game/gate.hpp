@@ -1,11 +1,3 @@
-//
-//  gate.hpp
-//  Labyrinth-Game
-//
-//  Created by Hakan KOCAK on 2.01.2020.
-//  Copyright © 2020 Hakan KOCAK. All rights reserved.
-//
-
 #ifndef gate_hpp
 #define gate_hpp
 

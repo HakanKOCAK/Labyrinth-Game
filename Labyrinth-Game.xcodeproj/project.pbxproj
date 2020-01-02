@@ -20,6 +20,8 @@
 		398DDD1923BD7F1700681E5D /* wall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 398DDD1723BD7F1700681E5D /* wall.cpp */; };
 		398DDD1B23BE1A4800681E5D /* createWallsAndGates.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 398DDD1A23BE1A4800681E5D /* createWallsAndGates.cpp */; };
 		398DDD1F23BE27F500681E5D /* gate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 398DDD1D23BE27F500681E5D /* gate.cpp */; };
+		398DDD2223BE6A6F00681E5D /* bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 398DDD2023BE6A6F00681E5D /* bullet.cpp */; };
+		398DDD2723BE98E400681E5D /* pickup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 398DDD2523BE98E400681E5D /* pickup.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -50,7 +52,7 @@
 		398DDD0E23BD64D900681E5D /* crosshair.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = crosshair.png; sourceTree = "<group>"; };
 		398DDD0F23BD65FE00681E5D /* player.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = player.png; sourceTree = "<group>"; };
 		398DDD1023BD66A400681E5D /* floor_tile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = floor_tile.png; sourceTree = "<group>"; };
-		398DDD1223BD67EE00681E5D /* jockey_jull_of_bourbon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = jockey_jull_of_bourbon.ttf; sourceTree = "<group>"; };
+		398DDD1223BD67EE00681E5D /* jockey_full_of_bourbon.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = jockey_full_of_bourbon.ttf; sourceTree = "<group>"; };
 		398DDD1323BD6BAE00681E5D /* createBackground.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = createBackground.cpp; sourceTree = "<group>"; };
 		398DDD1523BD6BFD00681E5D /* labyrinthGame.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = labyrinthGame.hpp; sourceTree = "<group>"; };
 		398DDD1623BD74FA00681E5D /* wall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wall.png; sourceTree = "<group>"; };
@@ -60,6 +62,13 @@
 		398DDD1C23BE27DE00681E5D /* gate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gate.png; sourceTree = "<group>"; };
 		398DDD1D23BE27F500681E5D /* gate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gate.cpp; sourceTree = "<group>"; };
 		398DDD1E23BE27F500681E5D /* gate.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gate.hpp; sourceTree = "<group>"; };
+		398DDD2023BE6A6F00681E5D /* bullet.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = bullet.cpp; sourceTree = "<group>"; };
+		398DDD2123BE6A6F00681E5D /* bullet.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = bullet.hpp; sourceTree = "<group>"; };
+		398DDD2323BE6BDA00681E5D /* bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullet.png; sourceTree = "<group>"; };
+		398DDD2423BE985700681E5D /* health_kit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = health_kit.png; sourceTree = "<group>"; };
+		398DDD2523BE98E400681E5D /* pickup.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = pickup.cpp; sourceTree = "<group>"; };
+		398DDD2623BE98E400681E5D /* pickup.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = pickup.hpp; sourceTree = "<group>"; };
+		398DDD2823BE999200681E5D /* key.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = key.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +121,10 @@
 				398DDD1A23BE1A4800681E5D /* createWallsAndGates.cpp */,
 				398DDD1D23BE27F500681E5D /* gate.cpp */,
 				398DDD1E23BE27F500681E5D /* gate.hpp */,
+				398DDD2023BE6A6F00681E5D /* bullet.cpp */,
+				398DDD2123BE6A6F00681E5D /* bullet.hpp */,
+				398DDD2523BE98E400681E5D /* pickup.cpp */,
+				398DDD2623BE98E400681E5D /* pickup.hpp */,
 			);
 			path = "Labyrinth-Game";
 			sourceTree = "<group>";
@@ -141,6 +154,9 @@
 		398DDD0523BD619800681E5D /* graphics */ = {
 			isa = PBXGroup;
 			children = (
+				398DDD2823BE999200681E5D /* key.png */,
+				398DDD2423BE985700681E5D /* health_kit.png */,
+				398DDD2323BE6BDA00681E5D /* bullet.png */,
 				398DDD1C23BE27DE00681E5D /* gate.png */,
 				398DDD1623BD74FA00681E5D /* wall.png */,
 				398DDD1023BD66A400681E5D /* floor_tile.png */,
@@ -153,7 +169,7 @@
 		398DDD1123BD67E400681E5D /* fonts */ = {
 			isa = PBXGroup;
 			children = (
-				398DDD1223BD67EE00681E5D /* jockey_jull_of_bourbon.ttf */,
+				398DDD1223BD67EE00681E5D /* jockey_full_of_bourbon.ttf */,
 			);
 			path = fonts;
 			sourceTree = "<group>";
@@ -217,8 +233,10 @@
 				398DDD0923BD627900681E5D /* player.cpp in Sources */,
 				398DDD1423BD6BAE00681E5D /* createBackground.cpp in Sources */,
 				398DDD1F23BE27F500681E5D /* gate.cpp in Sources */,
+				398DDD2223BE6A6F00681E5D /* bullet.cpp in Sources */,
 				398DDD0C23BD62CE00681E5D /* textureHolder.cpp in Sources */,
 				398DDD1923BD7F1700681E5D /* wall.cpp in Sources */,
+				398DDD2723BE98E400681E5D /* pickup.cpp in Sources */,
 				3971B34323BD099800BE83C7 /* labyrinthGame.cpp in Sources */,
 				398DDD1B23BE1A4800681E5D /* createWallsAndGates.cpp in Sources */,
 			);

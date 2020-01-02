@@ -1,11 +1,3 @@
-//
-//  player.cpp
-//  Labyrinth-Game
-//
-//  Created by Hakan KOCAK on 2.01.2020.
-//  Copyright © 2020 Hakan KOCAK. All rights reserved.
-//
-
 #include "player.hpp"
 #include "textureHolder.hpp"
 #include <iostream>
@@ -16,11 +8,9 @@ Player::Player(){
     
     // Associate a texture with the sprite
     m_Sprite = Sprite(TextureHolder::GetTexture("../Resources/graphics/player.png"));
-    
-    m_Sprite.setScale(100.0f / m_Sprite.getLocalBounds().width, 100.0f / m_Sprite.getLocalBounds().height);
     // Set the origin of the sprite to the centre,
     // for smooth rotation
-    m_Sprite.setOrigin(0, 0);
+    m_Sprite.setOrigin(39.5f, 60.0f);
 }
 
 void Player::spawn(Vector2f resolution, int tileSize) {
@@ -128,15 +118,5 @@ void Player::updateMovement(float elapsedTime){
             m_CanMoveRight = true;
         }
     } else {
-        
-    }
-}
-
-void Player::increaseHealthLevel(int amount){
-    m_Health += amount;
-    
-    // But not beyond the maximum
-    if (m_Health > HEALTH){
-        m_Health = HEALTH;
     }
 }
