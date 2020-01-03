@@ -153,6 +153,37 @@ int main(int argc, const char * argv[]) {
     healthBar.setPosition(resolution.x*0.33, resolution.y-200);
     
     
+    // Prepare the shoot sound
+    SoundBuffer shootBuffer;
+    shootBuffer.loadFromFile("../Resources/sounds/shoot.wav");
+    Sound shoot;
+    shoot.setBuffer(shootBuffer);
+    
+    // Prepare the reload sound
+    SoundBuffer reloadBuffer;
+    reloadBuffer.loadFromFile("../Resources/sounds/reload.wav");
+    Sound reload;
+    reload.setBuffer(reloadBuffer);
+    
+    // Prepare the pain sound
+    SoundBuffer hitByBullet;
+    hitByBullet.loadFromFile("../Resources/sounds/pain.wav");
+    Sound pain;
+    pain.setBuffer(hitByBullet);
+    
+    // Prepare the knife hit sound
+    SoundBuffer hitByKnife;
+    hitByKnife.loadFromFile("../Resources/sounds/knife_hit.wav");
+    Sound knifeHit;
+    knifeHit.setBuffer(hitByKnife);
+    
+    // Prepare no ammo sound
+    SoundBuffer noAmmoBuffer;
+    noAmmoBuffer.loadFromFile("../Resources/sounds/no_ammo.wav");
+    Sound noAmmo;
+    noAmmo.setBuffer(noAmmoBuffer);
+    
+    
     // When did we last update the HUD?
     int framesSinceLastHUDUpdate = 0;
     
@@ -218,6 +249,9 @@ int main(int argc, const char * argv[]) {
                                 bulletsInClip += bulletsSpare;
                                 bulletsSpare = 0;
                             }
+                            reload.play();
+                        } else{
+                            noAmmo.play();
                         }
                     }
                 }
@@ -363,9 +397,7 @@ int main(int argc, const char * argv[]) {
                     //                             mouseWorldPosition.x, mouseWorldPosition.y);
                     
                     // if working on iMac Retina comment out above and uncomment below
-                    bullets[currentBullet].shoot(
-                                                 player.getCenter().x, player.getCenter().y,
-                                                 mouseWorldPosition.x, mouseWorldPosition.y - resolution.y);
+                    bullets[currentBullet].shoot(player.getCenter().x, player.getCenter().y,mouseWorldPosition.x, mouseWorldPosition.y - resolution.y);
                     
                     
                     currentBullet++;
@@ -374,7 +406,11 @@ int main(int argc, const char * argv[]) {
                     }
                     lastPressed = gameTimeTotal;
                     
+                    shoot.play();
+                    
                     bulletsInClip--;
+                } else {
+                    noAmmo.play();
                 }
                 
             }// End fire a bullet
@@ -435,7 +471,7 @@ int main(int argc, const char * argv[]) {
             }
             
             // Collision detection
-            // Have any zombies been shot?
+            // Have any enemies been shot?
             for (int i = 0; i < 100; i++)
             {
                 for (int j = 0; j < numOfEnemies; j++)
@@ -451,12 +487,13 @@ int main(int argc, const char * argv[]) {
                             
                             // Register the hit and see if it was a kill
                             if (enemies[j].hit()) {
+                                pain.play();
                                 // Not just a hit but a kill too
                                 score += 10;
                                 
                                 numOfAliveEnemies--;
                                 
-                                // When all the zombies are dead (again)
+                                // When all the enemies are dead (again)
                                 if (numOfAliveEnemies == 0) {
                                     state = State::GAME_OVER;
                                 }
@@ -466,8 +503,27 @@ int main(int argc, const char * argv[]) {
                     }
                     
                 }
-            }// End zombie being shot
+            }// End enemy being shot
             
+            // Have any enemies touched the player
+            for (int i = 0; i < numOfEnemies; i++)
+            {
+                if (player.getPosition().intersects(enemies[i].getPosition()) && enemies[i].getHealth()>0)
+                {
+                    
+                    if (player.hit(gameTimeTotal))
+                    {
+                        // More here later
+                        knifeHit.play();
+                    }
+                    
+                    if (player.getHealth() <= 0)
+                    {
+                        state = State::GAME_OVER;
+                    }
+                    
+                }
+            }// End player touched
             
             //Check the collision between bullets and walls
             for (int i = 0; i < 100; i++)

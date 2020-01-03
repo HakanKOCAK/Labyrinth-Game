@@ -16,20 +16,16 @@ Pickup::Pickup(int type)
     // Associate the texture with the sprite
     if (m_Type == 1){
         m_Sprite = Sprite(TextureHolder::GetTexture("../Resources/graphics/health_kit.png"));
-        m_Sprite.setOrigin(25.0f, 25.0f);
-        
         // How much is pickup worth?
         m_Value = HEALTH_VALUE;
         
     }else if (m_Type == 2){
         m_Sprite = Sprite(TextureHolder::GetTexture("../Resources/graphics/ammo_crate.png"));
-        m_Sprite.setOrigin(25.0f, 25.0f);
         
         // How much is pickup worth?
         m_Value = AMMO_VALUE;
     } else {
         m_Sprite = Sprite(TextureHolder::GetTexture("../Resources/graphics/key.png"));
-        m_Sprite.setOrigin(25.0f, 25.0f);
         m_Value = KEY_VALUE;
     }
     

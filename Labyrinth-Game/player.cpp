@@ -10,7 +10,7 @@ Player::Player(){
     m_Sprite = Sprite(TextureHolder::GetTexture("../Resources/graphics/player.png"));
     // Set the origin of the sprite to the centre,
     // for smooth rotation
-    m_Sprite.setOrigin(60.0f, 39.5f);
+    m_Sprite.setOrigin(60.0f, 60.0f);
     
     m_Rect.setSize(Vector2f(50.0f, 50.0f));
     m_Rect.setPosition(300, 2500);
@@ -116,7 +116,6 @@ void Player::updateMovement(float elapsedTime){
             m_CanMoveDown = true;
             m_CanMoveLeft = true;
             m_CanMoveRight = true;
-            //m_Sprite.setRotation(270.0f);
         }
     }else if(Keyboard::isKeyPressed(Keyboard::S)){
         if(m_CanMoveDown){
@@ -127,7 +126,6 @@ void Player::updateMovement(float elapsedTime){
             m_CanMoveDown = true;
             m_CanMoveLeft = true;
             m_CanMoveRight = true;
-            //m_Sprite.setRotation(90.0f);
         }
     }else if(Keyboard::isKeyPressed(Keyboard::A)){
         if(m_CanMoveLeft){
@@ -138,8 +136,6 @@ void Player::updateMovement(float elapsedTime){
             m_CanMoveDown = true;
             m_CanMoveLeft = true;
             m_CanMoveRight = true;
-            
-            //m_Sprite.setRotation(180.0f);
         }
     }else if(Keyboard::isKeyPressed(Keyboard::D)){
         if(m_CanMoveRight){
@@ -150,8 +146,6 @@ void Player::updateMovement(float elapsedTime){
             m_CanMoveDown = true;
             m_CanMoveLeft = true;
             m_CanMoveRight = true;
-            
-           // m_Sprite.setRotation(0.0f);
         }
     } else {
     }

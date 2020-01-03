@@ -78,7 +78,11 @@
 		398DDD2D23BEDC1D00681E5D /* enemy.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = enemy.cpp; sourceTree = "<group>"; };
 		398DDD2E23BEDC1D00681E5D /* enemy.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = enemy.hpp; sourceTree = "<group>"; };
 		398DDD3023BEE1EA00681E5D /* createEnemies.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = createEnemies.cpp; sourceTree = "<group>"; };
-		398DDD3323BF01B200681E5D /* shoot.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = shoot.wav; sourceTree = "<group>"; };
+		398DDD3423BF03EC00681E5D /* shoot.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = shoot.wav; sourceTree = "<group>"; };
+		398DDD3523BF048A00681E5D /* reload.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = reload.wav; sourceTree = "<group>"; };
+		398DDD3623BF04AC00681E5D /* knife_hit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = knife_hit.wav; sourceTree = "<group>"; };
+		398DDD3723BF055E00681E5D /* pain.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pain.wav; sourceTree = "<group>"; };
+		398DDD3823BF05C300681E5D /* no_ammo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = no_ammo.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,7 +198,11 @@
 		398DDD3223BF01A200681E5D /* sounds */ = {
 			isa = PBXGroup;
 			children = (
-				398DDD3323BF01B200681E5D /* shoot.wav */,
+				398DDD3823BF05C300681E5D /* no_ammo.wav */,
+				398DDD3723BF055E00681E5D /* pain.wav */,
+				398DDD3623BF04AC00681E5D /* knife_hit.wav */,
+				398DDD3523BF048A00681E5D /* reload.wav */,
+				398DDD3423BF03EC00681E5D /* shoot.wav */,
 			);
 			path = sounds;
 			sourceTree = "<group>";
