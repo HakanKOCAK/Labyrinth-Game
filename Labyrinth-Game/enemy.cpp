@@ -3,7 +3,6 @@
 #include <cstdlib>
 #include <iostream>
 #include <ctime>
-#include <math.h>       /* atan2 */
 
 using namespace std;
 
@@ -11,7 +10,7 @@ void Enemy::spawn(float startX, float startY){
     
     m_Sprite = Sprite(TextureHolder::GetTexture("../Resources/graphics/enemy.png"));
     
-    m_Speed = RUN_SPEED;
+    m_Speed = SPEED;
     m_Health = HEALTH;
     
     m_Sprite.setOrigin(60.0f, 46.5f);
@@ -38,18 +37,6 @@ bool Enemy::hit(){
     
     // injured but not dead yet
     return false;
-}
-
-FloatRect Enemy::getPosition(){
-    return m_Rect.getGlobalBounds();
-}
-
-int Enemy::getHealth(){
-    return m_Health;
-}
-
-Sprite Enemy::getSprite(){
-    return m_Sprite;
 }
 
 void Enemy::update(){

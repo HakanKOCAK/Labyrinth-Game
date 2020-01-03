@@ -230,7 +230,7 @@ int main(int argc, const char * argv[]) {
                     numOfAliveEnemies = numOfEnemies;
                     
                     // Spawn the player to the left bottom corner of the arena
-                    player.spawn(resolution, tileSize);
+                    player.spawn(resolution);
                     
                     // Reset the clock so there isn't a frame jump
                     clock.restart();

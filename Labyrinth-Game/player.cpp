@@ -18,14 +18,11 @@ Player::Player(){
     m_Rect.setOrigin(25.0f, 25.0f);
 }
 
-void Player::spawn(Vector2f resolution, int tileSize) {
+void Player::spawn(Vector2f resolution) {
     // Place the player to the left bottom corner of the arena
     m_Position.x = 300;
     m_Position.y = 2500;
-    
-    // Remember how big the tiles are in this arena
-    m_TileSize = tileSize;
-    
+ 
     // Store the resolution for future use
     m_Resolution.x = resolution.x;
     m_Resolution.y = resolution.y;
@@ -52,24 +49,12 @@ bool Player::hit(Time timeHit){
     
 }
 
-FloatRect Player::getPosition(){
-    return m_Rect.getGlobalBounds();
-}
-
 Vector2f Player::getCenter(){
     return m_Position;
 }
 
 float Player::getRotation(){
     return m_Sprite.getRotation();
-}
-
-Sprite Player::getSprite(){
-    return m_Sprite;
-}
-
-int Player::getHealth(){
-    return m_Health;
 }
 
 void Player::update(Vector2i mousePosition){
