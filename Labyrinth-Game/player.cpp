@@ -79,6 +79,25 @@ void Player::update(Vector2i mousePosition){
     m_Sprite.setRotation(angle);
 }
 
+bool Player::doHaveAKey(){
+    return m_HasKey;
+}
+
+void Player::setKey(bool haveAKey){
+    m_HasKey = haveAKey;
+}
+
+void Player::increaseHealthLevel(int amount)
+{
+    m_Health += amount;
+    
+    // But not beyond the maximum
+    if (m_Health > HEALTH)
+    {
+        m_Health = HEALTH;
+    }
+}
+
 void Player::updateMovement(float elapsedTime){
     
     if(Keyboard::isKeyPressed(Keyboard::W)){

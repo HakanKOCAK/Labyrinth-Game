@@ -4,6 +4,7 @@
 #include <fstream>
 #include "player.hpp"
 #include "bullet.hpp"
+#include "pickup.hpp"
 #include "textureHolder.hpp"
 #include "labyrinthGame.hpp"
 
@@ -60,6 +61,10 @@ int main(int argc, const char * argv[]) {
     std::vector<Gate> gateArray;
     std::vector<Gate>::const_iterator gateIterator;
     
+    //Pickups
+    std::vector<Pickup> pickupArray;
+    std::vector<Pickup>::const_iterator pickupIterator;
+    
     // Hide the mouse pointer and replace it with crosshair
     window.setMouseCursorVisible(false);
     Sprite spriteCrosshair;
@@ -71,9 +76,8 @@ int main(int argc, const char * argv[]) {
     
     Bullet bullets[100];
     int currentBullet = 0;
-    int bulletsSpare = 24;
-    int bulletsInClip = 6;
-    int clipSize = 6;
+    int bulletsSpare = 10;
+    int bulletsInClip = 10;
     float fireRate = 1;
     // When was the fire button last pressed?
     Time lastPressed;
@@ -134,7 +138,7 @@ int main(int argc, const char * argv[]) {
     int framesSinceLastHUDUpdate = 0;
     
     // How often (in frames) should we update the HUD
-    int fpsMeasurementFrameInterval = 500;
+    int fpsMeasurementFrameInterval = 200;
     
     // The main game loop
     while (window.isOpen()) {
@@ -160,12 +164,12 @@ int main(int argc, const char * argv[]) {
                     // to the createBackground function
                     int tileSize = createBackground(background, arena);
                     createWallsAndGates(wallArray, gateArray);
+                    createPickups(pickupArray);
     
                     // Prepare the gun and ammo for next game
                     currentBullet = 0;
-                    bulletsSpare = 24;
-                    bulletsInClip = 6;
-                    clipSize = 6;
+                    bulletsSpare = 10;
+                    bulletsInClip = 10;
                     fireRate = 1;
                     
                     // Reset the player's stats
@@ -176,6 +180,23 @@ int main(int argc, const char * argv[]) {
                     
                     // Reset the clock so there isn't a frame jump
                     clock.restart();
+                }
+                
+                if (state == State::PLAYING)
+                {
+                    // Reloading
+                    if (event.key.code == Keyboard::R) {
+                        if (bulletsSpare > 0 && bulletsInClip != 10){
+                            if (bulletsSpare + bulletsInClip >= 10){
+                                int val = bulletsInClip;
+                                bulletsInClip += 10 - bulletsInClip;
+                                bulletsSpare -= 10 - val;
+                            } else {
+                                bulletsInClip += bulletsSpare;
+                                bulletsSpare = 0;
+                            }
+                        }
+                    }
                 }
                 
                 
@@ -311,6 +332,21 @@ int main(int argc, const char * argv[]) {
                 }
             }
             
+            
+            int counter = 0;
+            for(pickupIterator = pickupArray.begin(); pickupIterator != pickupArray.end(); pickupIterator++){
+                if(player.getPosition().intersects(pickupArray[counter].getPosition()) && pickupArray[counter].isInTheArena()){
+                    if(pickupArray[counter].returnType() == 1){
+                        player.increaseHealthLevel(pickupArray[counter].gotIt());
+                    } else if (pickupArray[counter].returnType() == 2){
+                        bulletsSpare += pickupArray[counter].gotIt();
+                    } else {
+                        player.setKey(true);
+                    }
+                }
+                counter++;
+            }
+            
             // size up the health bar
             healthBar.setSize(Vector2f(player.getHealth() * 3, 70));
             
@@ -364,6 +400,14 @@ int main(int argc, const char * argv[]) {
                 counter++;
             }
           
+            counter = 0;
+            for(pickupIterator = pickupArray.begin(); pickupIterator != pickupArray.end(); pickupIterator++){
+                if(pickupArray[counter].isInTheArena()){
+                    window.draw(pickupArray[counter].getSprite());
+                }
+                counter++;
+            }
+            
             for (int i = 0; i < 100; i++) {
                 if (bullets[i].isInFlight()) {
                     window.draw(bullets[i].getShape());

@@ -33,6 +33,9 @@ private:
     // Speed in pixels per second
     float m_Speed;
     
+    //Check if player has key
+    bool m_HasKey;
+    
 public:
     
     Player();
@@ -73,12 +76,18 @@ public:
     // How much health has the player currently got?
     int getHealth();
     
+    //Check if player has a key
+    bool doHaveAKey();
+    
+    //Set to have a key
+    void setKey(bool haveAKey);
+    
     // We will call this function once every frame
     void update(Vector2i mousePosition);
     void updateMovement(float elapsedTime);
     
-    // Give the player some health
-    void upgradeHealth();
+    // Increase the maximum amount of health the player can have
+    void increaseHealthLevel(int amount);
 };
 
 
