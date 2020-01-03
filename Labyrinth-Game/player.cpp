@@ -10,11 +10,12 @@ Player::Player(){
     m_Sprite = Sprite(TextureHolder::GetTexture("../Resources/graphics/player.png"));
     // Set the origin of the sprite to the centre,
     // for smooth rotation
-    m_Sprite.setOrigin(39.5f, 60.0f);
+    m_Sprite.setOrigin(60.0f, 39.5f);
     
-    rect.setSize(Vector2f(79.0f, 120.0f));
-    rect.setPosition(300, 2500);
-    rect.setOrigin(39.5f, 60.0f);
+    m_Rect.setSize(Vector2f(50.0f, 50.0f));
+    m_Rect.setPosition(300, 2500);
+    m_Rect.setFillColor(Color::Transparent);
+    m_Rect.setOrigin(25.0f, 25.0f);
 }
 
 void Player::spawn(Vector2f resolution, int tileSize) {
@@ -52,7 +53,7 @@ bool Player::hit(Time timeHit){
 }
 
 FloatRect Player::getPosition(){
-    return m_Sprite.getGlobalBounds();
+    return m_Rect.getGlobalBounds();
 }
 
 Vector2f Player::getCenter(){
@@ -73,7 +74,7 @@ int Player::getHealth(){
 
 void Player::update(Vector2i mousePosition){
     m_Sprite.setPosition(m_Position);
-    rect.setPosition(m_Position.x, m_Position.y);
+    m_Rect.setPosition(m_Position.x, m_Position.y);
     
     // Calculate the angle the player is facing
     //float angle = (atan2(mousePosition.y - m_Resolution.y / 2,mousePosition.x - m_Resolution.x / 2) * 180) / 3.141;
@@ -82,6 +83,7 @@ void Player::update(Vector2i mousePosition){
     float angle = (atan2((mousePosition.y-m_Resolution.y) - m_Resolution.y / 2, mousePosition.x - m_Resolution.x / 2) * 180) / 3.141;
     
     m_Sprite.setRotation(angle);
+    m_Rect.setRotation(angle);
 }
 
 bool Player::doHaveAKey(){
@@ -108,42 +110,48 @@ void Player::updateMovement(float elapsedTime){
     if(Keyboard::isKeyPressed(Keyboard::W)){
         if(m_CanMoveUp){
             m_Position.y -= m_Speed * elapsedTime;
-            rect.move(0, -m_Speed*elapsedTime);
+            m_Rect.move(0, -m_Speed*elapsedTime);
             m_Direction = 1;
             m_CanMoveUp = true;
             m_CanMoveDown = true;
             m_CanMoveLeft = true;
             m_CanMoveRight = true;
+            //m_Sprite.setRotation(270.0f);
         }
     }else if(Keyboard::isKeyPressed(Keyboard::S)){
         if(m_CanMoveDown){
             m_Position.y += m_Speed * elapsedTime;
-            rect.move(0, m_Speed*elapsedTime);
+            m_Rect.move(0, m_Speed*elapsedTime);
             m_Direction = 2;
             m_CanMoveUp = true;
             m_CanMoveDown = true;
             m_CanMoveLeft = true;
             m_CanMoveRight = true;
+            //m_Sprite.setRotation(90.0f);
         }
     }else if(Keyboard::isKeyPressed(Keyboard::A)){
         if(m_CanMoveLeft){
             m_Position.x -= m_Speed * elapsedTime;
-            rect.move(-m_Speed*elapsedTime, 0);
+            m_Rect.move(-m_Speed*elapsedTime, 0);
             m_Direction = 3;
             m_CanMoveUp = true;
             m_CanMoveDown = true;
             m_CanMoveLeft = true;
             m_CanMoveRight = true;
+            
+            //m_Sprite.setRotation(180.0f);
         }
     }else if(Keyboard::isKeyPressed(Keyboard::D)){
         if(m_CanMoveRight){
             m_Position.x += m_Speed * elapsedTime;
-            rect.move(m_Speed*elapsedTime, 0);
+            m_Rect.move(m_Speed*elapsedTime, 0);
             m_Direction = 4;
             m_CanMoveUp = true;
             m_CanMoveDown = true;
             m_CanMoveLeft = true;
             m_CanMoveRight = true;
+            
+           // m_Sprite.setRotation(0.0f);
         }
     } else {
     }

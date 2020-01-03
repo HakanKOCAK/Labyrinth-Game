@@ -1,9 +1,3 @@
-//
-//  bullet.hpp
-//  Zombie Arena
-//
-//
-
 #ifndef bullet_hpp
 #define bullet_hpp
 

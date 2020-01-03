@@ -1,11 +1,3 @@
-//
-//  wall.hpp
-//  Labyrinth-Game
-//
-//  Created by Hakan KOCAK on 2.01.2020.
-//  Copyright © 2020 Hakan KOCAK. All rights reserved.
-//
-
 #ifndef wall_hpp
 #define wall_hpp
 

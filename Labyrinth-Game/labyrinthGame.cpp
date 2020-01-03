@@ -1,10 +1,10 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <iostream>
 #include <sstream>
 #include <fstream>
 #include "player.hpp"
 #include "bullet.hpp"
-#include "pickup.hpp"
 #include "textureHolder.hpp"
 #include "labyrinthGame.hpp"
 
@@ -53,6 +53,10 @@ int main(int argc, const char * argv[]) {
     // Load the texture for our background vertex array
     Texture textureBackground = TextureHolder::GetTexture("../Resources/graphics/floor_tile.png");
     
+    int numOfEnemies = 22;
+    int numOfAliveEnemies = 22;
+    Enemy *enemies = nullptr;
+    
     //Walls
     std::vector<Wall> wallArray;
     std::vector<Wall>::const_iterator wallIterator;
@@ -82,8 +86,6 @@ int main(int argc, const char * argv[]) {
     // When was the fire button last pressed?
     Time lastPressed;
     
-    
-    
     // Create a view for the HUD
     View hudView(FloatRect(0, 0, resolution.x, resolution.y));
     
@@ -109,6 +111,23 @@ int main(int argc, const char * argv[]) {
     FloatRect pausedRect = pausedText.getLocalBounds();
     pausedText.setOrigin(pausedRect.left+pausedRect.width/2.0f, pausedRect.top+pausedRect.height/2.0f);
     pausedText.setPosition(resolution.x/2, resolution.y/2);
+    
+    // About the game
+    int score = 0;
+    // Score
+    Text scoreText;
+    scoreText.setFont(font);
+    scoreText.setCharacterSize(55);
+    scoreText.setFillColor(Color::White);
+    scoreText.setPosition(20, 0);
+    
+    // Zombies remaining
+    Text enemiesRemainingText;
+    enemiesRemainingText.setFont(font);
+    enemiesRemainingText.setCharacterSize(55);
+    enemiesRemainingText.setFillColor(Color::White);
+    enemiesRemainingText.setPosition(resolution.x-400, resolution.y-200);
+    enemiesRemainingText.setString("Enemies: 22");
     
     // Game Over
     Text gameOverText;
@@ -171,9 +190,13 @@ int main(int argc, const char * argv[]) {
                     bulletsSpare = 10;
                     bulletsInClip = 10;
                     fireRate = 1;
+                    score = 0;
                     
                     // Reset the player's stats
                     player.resetPlayerStats();
+                    delete[] enemies;
+                    enemies = createEnemies(numOfEnemies);
+                    numOfAliveEnemies = numOfEnemies;
                     
                     // Spawn the player to the left bottom corner of the arena
                     player.spawn(resolution, tileSize);
@@ -212,28 +235,69 @@ int main(int argc, const char * argv[]) {
         
         if (state == State::PLAYING)
         {
+            
             int counter = 0;
+            
+            for(int i=0; i<numOfEnemies; i++){
+                counter = 0;
+                for(wallIterator = wallArray.begin(); wallIterator != wallArray.end(); wallIterator++){
+                    if (enemies[i].getPosition().intersects(wallArray[counter].getPosition())){
+                        //Up
+                        if (enemies[i].m_Direction == 1){
+                            enemies[i].m_CanMoveUp = false;
+                            enemies[i].m_Rect.move(0, 1);
+                            enemies[i].m_Direction = 2;
+                            enemies[i].m_GenerateRandom = false;
+                        }
+                        //Down
+                        else if (enemies[i].m_Direction == 2){
+                            enemies[i].m_CanMoveDown = false;
+                            enemies[i].m_Rect.move(0, -1);
+                            enemies[i].m_Direction = 1;
+                            enemies[i].m_GenerateRandom = false;
+                        }
+                        //Left
+                        else if (enemies[i].m_Direction == 3){
+                            enemies[i].m_CanMoveLeft = false;
+                            enemies[i].m_Rect.move(1, 0);
+                            enemies[i].m_Direction = 4;
+                            enemies[i].m_GenerateRandom = false;
+                        }
+                        //Right
+                        else if (enemies[i].m_Direction == 4){
+                            enemies[i].m_CanMoveRight = false;
+                            enemies[i].m_Rect.move(-1, 0);
+                            enemies[i].m_Direction = 3;
+                            enemies[i].m_GenerateRandom = false;
+                        }
+                    }
+                    counter ++;
+                }
+            }
+            
+            
+            counter = 0;
             for(wallIterator = wallArray.begin(); wallIterator != wallArray.end(); wallIterator++){
-                if (player.rect.getGlobalBounds().intersects(wallArray[counter].getPosition())){
+                if (player.getPosition().intersects(wallArray[counter].getPosition())){
                     //Up
                     if (player.m_Direction == 1){
                         player.m_CanMoveUp = false;
-                        player.rect.move(0, 1);
+                        player.m_Rect.move(0, 1);
                     }
                     //Down
                     else if (player.m_Direction == 2){
                         player.m_CanMoveDown = false;
-                        player.rect.move(0, -1);
+                        player.m_Rect.move(0, -1);
                     }
                     //Left
                     else if (player.m_Direction == 3){
                         player.m_CanMoveLeft = false;
-                        player.rect.move(1, 0);
+                        player.m_Rect.move(1, 0);
                     }
                     //Right
                     else if (player.m_Direction == 4){
                         player.m_CanMoveRight = false;
-                        player.rect.move(-1, 0);
+                        player.m_Rect.move(-1, 0);
                     }
                 }
                 counter ++;
@@ -260,14 +324,8 @@ int main(int argc, const char * argv[]) {
                     }
                     
                     if(player.doHaveAKey() && Keyboard::isKeyPressed(Keyboard::Key::F)){
+                        gateArray[counter].openTheGate();
                         
-                        int gateNum = gateArray[counter].getGateNumber();
-                        int newCounter = 0;
-                        for(gateIterator = gateArray.begin(); gateIterator != gateArray.end(); gateIterator++){
-                            if(gateArray[newCounter].getGateNumber() == gateNum){
-                                gateArray[newCounter].openTheGate();
-                            }
-                        }
                         player.setKey(false);
                         
                         if(gateArray[counter].getGateNumber() == 3){
@@ -361,12 +419,54 @@ int main(int argc, const char * argv[]) {
             // Make the view centre around the player
             mainView.setCenter(player.getCenter());
             
+            //Update the enemies
+            for (int i = 0; i < numOfEnemies; i++) {
+                if (enemies[i].getHealth() > 0) {
+                    enemies[i].update();
+                    enemies[i].updateMovement(dt.asSeconds());
+                }
+            }
+            
             // Update any bullets that are in-flight
             for (int i = 0; i < 100; i++) {
                 if (bullets[i].isInFlight()) {
                     bullets[i].update(dtAsSeconds);
                 }
             }
+            
+            // Collision detection
+            // Have any zombies been shot?
+            for (int i = 0; i < 100; i++)
+            {
+                for (int j = 0; j < numOfEnemies; j++)
+                {
+                    if (bullets[i].isInFlight() &&
+                        enemies[j].getHealth() > 0)
+                    {
+                        if (bullets[i].getPosition().intersects
+                            (enemies[j].getPosition()))
+                        {
+                            // Stop the bullet
+                            bullets[i].stop();
+                            
+                            // Register the hit and see if it was a kill
+                            if (enemies[j].hit()) {
+                                // Not just a hit but a kill too
+                                score += 10;
+                                
+                                numOfAliveEnemies--;
+                                
+                                // When all the zombies are dead (again)
+                                if (numOfAliveEnemies == 0) {
+                                    state = State::GAME_OVER;
+                                }
+                            }
+                            
+                        }
+                    }
+                    
+                }
+            }// End zombie being shot
             
             
             //Check the collision between bullets and walls
@@ -408,10 +508,20 @@ int main(int argc, const char * argv[]) {
                 
                 // Update game HUD text
                 std::stringstream ssAmmo;
+                std::stringstream ssScore;
+                std::stringstream ssEnemiesAlive;
                 
                 // Update the ammo text
                 ssAmmo << bulletsInClip << "/" << bulletsSpare;
                 ammoText.setString(ssAmmo.str());
+                
+                // Update the score text
+                ssScore << "Score:" << score;
+                scoreText.setString(ssScore.str());
+                
+                // Update the high score text
+                ssEnemiesAlive << "Enemies:" << numOfAliveEnemies;
+                enemiesRemainingText.setString(ssEnemiesAlive.str());
                 
                 framesSinceLastHUDUpdate = 0;
                 
@@ -461,6 +571,13 @@ int main(int argc, const char * argv[]) {
                 counter++;
             }
             
+            // Draw the zombies
+            for (int i = 0; i < numOfEnemies; i++) {
+                if(enemies[i].getHealth() > 0){
+                    window.draw(enemies[i].getSprite());
+                }
+            }
+            
             for (int i = 0; i < 100; i++) {
                 if (bullets[i].isInFlight()) {
                     window.draw(bullets[i].getShape());
@@ -469,7 +586,6 @@ int main(int argc, const char * argv[]) {
             
             // Draw the player
             window.draw(player.getSprite());
-            window.draw(player.rect);
             
             //Draw the crosshair
             window.draw(spriteCrosshair);
@@ -481,6 +597,8 @@ int main(int argc, const char * argv[]) {
             window.draw(spriteAmmoIcon);
             window.draw(ammoText);
             window.draw(healthBar);
+            window.draw(scoreText);
+            window.draw(enemiesRemainingText);
         }
         
         

@@ -49,7 +49,8 @@ public:
     bool m_CanMoveDown = true;
     bool m_CanMoveRight = true;
     
-    RectangleShape rect;
+    //For Clear collision
+    RectangleShape m_Rect;
     
     void spawn(Vector2f resolution, int tileSize);
     

@@ -31,6 +31,7 @@ public:
     void setGateNumber(int num);
     int getGateNumber();
     
+    void setRotation(float angle);
     void openTheGate();
     bool isGateOpen();
 };

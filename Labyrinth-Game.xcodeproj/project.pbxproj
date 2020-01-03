@@ -23,6 +23,8 @@
 		398DDD2223BE6A6F00681E5D /* bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 398DDD2023BE6A6F00681E5D /* bullet.cpp */; };
 		398DDD2723BE98E400681E5D /* pickup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 398DDD2523BE98E400681E5D /* pickup.cpp */; };
 		398DDD2B23BE9D0800681E5D /* createPickups.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 398DDD2A23BE9D0800681E5D /* createPickups.cpp */; };
+		398DDD2F23BEDC1D00681E5D /* enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 398DDD2D23BEDC1D00681E5D /* enemy.cpp */; };
+		398DDD3123BEE1EA00681E5D /* createEnemies.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 398DDD3023BEE1EA00681E5D /* createEnemies.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -72,6 +74,11 @@
 		398DDD2823BE999200681E5D /* key.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = key.png; sourceTree = "<group>"; };
 		398DDD2923BE9CAF00681E5D /* ammo_crate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ammo_crate.png; sourceTree = "<group>"; };
 		398DDD2A23BE9D0800681E5D /* createPickups.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = createPickups.cpp; sourceTree = "<group>"; };
+		398DDD2C23BED9D300681E5D /* enemy.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = enemy.png; sourceTree = "<group>"; };
+		398DDD2D23BEDC1D00681E5D /* enemy.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = enemy.cpp; sourceTree = "<group>"; };
+		398DDD2E23BEDC1D00681E5D /* enemy.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = enemy.hpp; sourceTree = "<group>"; };
+		398DDD3023BEE1EA00681E5D /* createEnemies.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = createEnemies.cpp; sourceTree = "<group>"; };
+		398DDD3323BF01B200681E5D /* shoot.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = shoot.wav; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +136,9 @@
 				398DDD2523BE98E400681E5D /* pickup.cpp */,
 				398DDD2623BE98E400681E5D /* pickup.hpp */,
 				398DDD2A23BE9D0800681E5D /* createPickups.cpp */,
+				398DDD2D23BEDC1D00681E5D /* enemy.cpp */,
+				398DDD2E23BEDC1D00681E5D /* enemy.hpp */,
+				398DDD3023BEE1EA00681E5D /* createEnemies.cpp */,
 			);
 			path = "Labyrinth-Game";
 			sourceTree = "<group>";
@@ -149,6 +159,7 @@
 		398DDD0423BD618700681E5D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				398DDD3223BF01A200681E5D /* sounds */,
 				398DDD1123BD67E400681E5D /* fonts */,
 				398DDD0523BD619800681E5D /* graphics */,
 			);
@@ -158,6 +169,7 @@
 		398DDD0523BD619800681E5D /* graphics */ = {
 			isa = PBXGroup;
 			children = (
+				398DDD2C23BED9D300681E5D /* enemy.png */,
 				398DDD2923BE9CAF00681E5D /* ammo_crate.png */,
 				398DDD2823BE999200681E5D /* key.png */,
 				398DDD2423BE985700681E5D /* health_kit.png */,
@@ -177,6 +189,14 @@
 				398DDD1223BD67EE00681E5D /* jockey_full_of_bourbon.ttf */,
 			);
 			path = fonts;
+			sourceTree = "<group>";
+		};
+		398DDD3223BF01A200681E5D /* sounds */ = {
+			isa = PBXGroup;
+			children = (
+				398DDD3323BF01B200681E5D /* shoot.wav */,
+			);
+			path = sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,6 +255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				398DDD3123BEE1EA00681E5D /* createEnemies.cpp in Sources */,
 				398DDD0923BD627900681E5D /* player.cpp in Sources */,
 				398DDD2B23BE9D0800681E5D /* createPickups.cpp in Sources */,
 				398DDD1423BD6BAE00681E5D /* createBackground.cpp in Sources */,
@@ -242,6 +263,7 @@
 				398DDD2223BE6A6F00681E5D /* bullet.cpp in Sources */,
 				398DDD0C23BD62CE00681E5D /* textureHolder.cpp in Sources */,
 				398DDD1923BD7F1700681E5D /* wall.cpp in Sources */,
+				398DDD2F23BEDC1D00681E5D /* enemy.cpp in Sources */,
 				398DDD2723BE98E400681E5D /* pickup.cpp in Sources */,
 				3971B34323BD099800BE83C7 /* labyrinthGame.cpp in Sources */,
 				398DDD1B23BE1A4800681E5D /* createWallsAndGates.cpp in Sources */,
