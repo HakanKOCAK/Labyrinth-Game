@@ -26,6 +26,7 @@
 		398DDD2F23BEDC1D00681E5D /* enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 398DDD2D23BEDC1D00681E5D /* enemy.cpp */; };
 		398DDD3123BEE1EA00681E5D /* createEnemies.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 398DDD3023BEE1EA00681E5D /* createEnemies.cpp */; };
 		398DDD3B23BF0CB300681E5D /* playerEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 398DDD3923BF0CB300681E5D /* playerEntity.cpp */; };
+		398DDD3E23BF120500681E5D /* gateAndWall.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 398DDD3C23BF120500681E5D /* gateAndWall.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -86,6 +87,8 @@
 		398DDD3823BF05C300681E5D /* no_ammo.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = no_ammo.wav; sourceTree = "<group>"; };
 		398DDD3923BF0CB300681E5D /* playerEntity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = playerEntity.cpp; sourceTree = "<group>"; };
 		398DDD3A23BF0CB300681E5D /* playerEntity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = playerEntity.hpp; sourceTree = "<group>"; };
+		398DDD3C23BF120500681E5D /* gateAndWall.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gateAndWall.cpp; sourceTree = "<group>"; };
+		398DDD3D23BF120500681E5D /* gateAndWall.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gateAndWall.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +151,8 @@
 				398DDD3023BEE1EA00681E5D /* createEnemies.cpp */,
 				398DDD3923BF0CB300681E5D /* playerEntity.cpp */,
 				398DDD3A23BF0CB300681E5D /* playerEntity.hpp */,
+				398DDD3C23BF120500681E5D /* gateAndWall.cpp */,
+				398DDD3D23BF120500681E5D /* gateAndWall.hpp */,
 			);
 			path = "Labyrinth-Game";
 			sourceTree = "<group>";
@@ -276,6 +281,7 @@
 				398DDD3B23BF0CB300681E5D /* playerEntity.cpp in Sources */,
 				398DDD2223BE6A6F00681E5D /* bullet.cpp in Sources */,
 				398DDD0C23BD62CE00681E5D /* textureHolder.cpp in Sources */,
+				398DDD3E23BF120500681E5D /* gateAndWall.cpp in Sources */,
 				398DDD1923BD7F1700681E5D /* wall.cpp in Sources */,
 				398DDD2F23BEDC1D00681E5D /* enemy.cpp in Sources */,
 				398DDD2723BE98E400681E5D /* pickup.cpp in Sources */,

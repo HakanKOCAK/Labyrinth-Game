@@ -8,19 +8,6 @@ Gate::Gate(){
     m_Sprite.setOrigin(100.0f, 50.0f);
 }
 
-Sprite Gate::getSprite()
-{
-    return m_Sprite;
-}
-
-FloatRect Gate::getPosition(){
-    return m_Sprite.getGlobalBounds();
-}
-
-void Gate::setPosition(int x, int y){
-    m_Sprite.setPosition(x, y);
-}
-
 void Gate::setGateNumber(int num){
     m_gateNumber = num;
 }

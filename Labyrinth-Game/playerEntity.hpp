@@ -1,11 +1,3 @@
-//
-//  playerEntity.hpp
-//  Labyrinth-Game
-//
-//  Created by Hakan KOCAK on 3.01.2020.
-//  Copyright © 2020 Hakan KOCAK. All rights reserved.
-//
-
 #ifndef playerEntity_hpp
 #define playerEntity_hpp
 
