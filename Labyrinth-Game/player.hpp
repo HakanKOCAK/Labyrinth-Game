@@ -35,9 +35,6 @@ public:
     // How long ago was the player last hit
     Time getLastHitTime();
     
-    // Where is the center of the player?
-    Vector2f getCenter();
-    
     // Which angle is the player facing?
     float getRotation();
     

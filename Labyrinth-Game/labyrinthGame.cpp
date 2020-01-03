@@ -458,6 +458,14 @@ int main(int argc, const char * argv[]) {
             //Update the enemies
             for (int i = 0; i < numOfEnemies; i++) {
                 if (enemies[i].getHealth() > 0) {
+                    int distance = sqrt(pow(player.getCenter().x - enemies[i].getCenter().x, 2) + pow(player.getCenter().y - enemies[i].getCenter().y, 2));
+                    
+                    //Increase the speed of the enemy when its close to player
+                    if(distance > 300){
+                        enemies[i].runToThePlayer(false);
+                    } else {
+                        enemies[i].runToThePlayer(true);
+                    }
                     enemies[i].update();
                     enemies[i].updateMovement(dt.asSeconds());
                 }
@@ -672,5 +680,7 @@ int main(int argc, const char * argv[]) {
         
     }// End game loop
 
+    // Delete the previously allocated memory (if it exists)
+    delete[] enemies;
     return 0;
 }

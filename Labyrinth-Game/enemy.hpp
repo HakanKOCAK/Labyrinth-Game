@@ -12,6 +12,9 @@ private:
     //Wait for
     int waitFor = 0;
     
+    //Run to the player
+    bool m_IsFocused = false;
+    
 public:
     bool m_GenerateRandom = true;
     
@@ -20,6 +23,9 @@ public:
     // Handle the player getting hit by a enemy
     bool hit();
 
+    void runToThePlayer(bool isFocused);
+
+    void setSpeed();
     // We will call this function once every frame
     void update();
     void updateMovement(float elapsedTime);

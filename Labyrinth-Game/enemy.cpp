@@ -10,7 +10,7 @@ void Enemy::spawn(float startX, float startY){
     
     m_Sprite = Sprite(TextureHolder::GetTexture("../Resources/graphics/enemy.png"));
     
-    m_Speed = SPEED;
+    m_Speed = WALK_SPEED;
     m_Health = HEALTH;
     
     m_Sprite.setOrigin(60.0f, 46.5f);
@@ -39,16 +39,28 @@ bool Enemy::hit(){
     return false;
 }
 
+void Enemy::setSpeed(){
+    if(m_IsFocused){
+        m_Speed = SPEED;
+    } else {
+        m_Speed = WALK_SPEED;
+    }
+}
+
+void Enemy::runToThePlayer(bool isFocused){
+    m_IsFocused = isFocused;
+}
+
 void Enemy::update(){
     m_Sprite.setPosition(m_Position);
     m_Rect.setPosition(m_Position.x, m_Position.y);
+    setSpeed();
 }
-
 void Enemy::updateMovement(float elapsedTime){
     if(m_Direction == 1){//Up
         if(m_CanMoveUp){
-            m_Position.y -= WALK_SPEED * elapsedTime;
-            m_Rect.move(0, -WALK_SPEED*elapsedTime);
+            m_Position.y -= m_Speed * elapsedTime;
+            m_Rect.move(0, -m_Speed * elapsedTime);
             m_GenerateRandom = true;
             m_Direction = 1;
             m_CanMoveUp = true;
@@ -60,8 +72,8 @@ void Enemy::updateMovement(float elapsedTime){
         }
     } else if(m_Direction == 2){ //Down
         if(m_CanMoveDown){
-            m_Position.y += WALK_SPEED * elapsedTime;
-            m_Rect.move(0, WALK_SPEED*elapsedTime);
+            m_Position.y += m_Speed * elapsedTime;
+            m_Rect.move(0, m_Speed*elapsedTime);
             m_GenerateRandom = true;
             m_Direction = 2;
             m_CanMoveUp = true;
@@ -73,8 +85,8 @@ void Enemy::updateMovement(float elapsedTime){
         }
     } else if(m_Direction == 3){ //Left
         if(m_CanMoveLeft){
-            m_Position.x -= WALK_SPEED * elapsedTime;
-            m_Rect.move(-WALK_SPEED*elapsedTime, 0);
+            m_Position.x -= m_Speed * elapsedTime;
+            m_Rect.move(-m_Speed*elapsedTime, 0);
             m_GenerateRandom = true;
             m_Direction = 3;
             m_CanMoveUp = true;
@@ -84,11 +96,11 @@ void Enemy::updateMovement(float elapsedTime){
             m_Sprite.setRotation(180.0f);
             m_Rect.setRotation(180.0f);
         }
-       
+        
     } else if(m_Direction == 4){//Right
         if(m_CanMoveRight){
-            m_Position.x += WALK_SPEED * elapsedTime;
-            m_Rect.move(WALK_SPEED*elapsedTime, 0);
+            m_Position.x += m_Speed * elapsedTime;
+            m_Rect.move(m_Speed*elapsedTime, 0);
             m_GenerateRandom = true;
             m_Direction = 4;
             m_CanMoveUp = true;
@@ -98,13 +110,19 @@ void Enemy::updateMovement(float elapsedTime){
             m_Sprite.setRotation(0.0f);
             m_Rect.setRotation(0.0f);
         }
-    } else{
+    }
         
+    waitFor++;
+    if(m_IsFocused){
+        if(waitFor >= 200 && m_GenerateRandom){
+            m_Direction = rand() % 4 + 1;
+            waitFor = 0;
+        }
+    } else {
+        if(waitFor >= 500 && m_GenerateRandom){
+            m_Direction = rand() % 4 + 1;
+            waitFor = 0;
+        }
     }
     
-    waitFor++;
-    if(waitFor >= 500 && m_GenerateRandom){
-        m_Direction = rand() % 4 + 1;
-        waitFor = 0;
-    }
 }

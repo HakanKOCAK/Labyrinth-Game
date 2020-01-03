@@ -48,11 +48,6 @@ bool Player::hit(Time timeHit){
     }
     
 }
-
-Vector2f Player::getCenter(){
-    return m_Position;
-}
-
 float Player::getRotation(){
     return m_Sprite.getRotation();
 }

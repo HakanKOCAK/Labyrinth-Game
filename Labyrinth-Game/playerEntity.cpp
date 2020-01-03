@@ -19,3 +19,7 @@ Sprite PlayerEntity::getSprite(){
 int PlayerEntity::getHealth(){
     return m_Health;
 }
+
+Vector2f PlayerEntity::getCenter(){
+    return m_Position;
+}

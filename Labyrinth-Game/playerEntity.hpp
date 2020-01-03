@@ -36,14 +36,17 @@ public:
     //For Clear collision
     RectangleShape m_Rect;
     
-    // Where is the enemy
+    // Where is the entity
     FloatRect getPosition();
     
     // Send a copy of the sprite to main
     Sprite getSprite();
     
-    // How much health has the enemy currently got?
+    // How much health has the entity currently got?
     int getHealth();
+    
+    // Where is the center of the playerentity?
+    Vector2f getCenter();
 };
 
 #endif /* playerEntity_hpp */
