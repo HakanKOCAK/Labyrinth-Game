@@ -218,24 +218,63 @@ int main(int argc, const char * argv[]) {
                     //Up
                     if (player.m_Direction == 1){
                         player.m_CanMoveUp = false;
-                        
-                        //Bounce back the player a bit.
-                        player.getSprite().move(0, -200);
                     }
                     //Down
                     else if (player.m_Direction == 2){
                         player.m_CanMoveDown = false;
-                        player.getSprite().move(0, 200);
                     }
                     //Left
                     else if (player.m_Direction == 3){
                         player.m_CanMoveLeft = false;
-                        player.getSprite().move(200, 0);
                     }
                     //Right
                     else if (player.m_Direction == 4){
                         player.m_CanMoveRight = false;
-                        player.getSprite().move(-200, 0);
+                    }
+                }
+                counter ++;
+            }
+            
+            counter = 0;
+            for(gateIterator = gateArray.begin(); gateIterator != gateArray.end(); gateIterator++){
+                if (player.getPosition().intersects(gateArray[counter].getPosition()) && !gateArray[counter].isGateOpen()){
+                    //Up
+                    if (player.m_Direction == 1){
+                        player.m_CanMoveUp = false;
+                    }
+                    //Down
+                    else if (player.m_Direction == 2){
+                        player.m_CanMoveDown = false;
+                    }
+                    //Left
+                    else if (player.m_Direction == 3){
+                        player.m_CanMoveLeft = false;
+                    }
+                    //Right
+                    else if (player.m_Direction == 4){
+                        player.m_CanMoveRight = false;
+                    }
+                    
+                    if(player.doHaveAKey() && Keyboard::isKeyPressed(Keyboard::Key::F)){
+                        gateArray[counter].openTheGate();
+                        player.setKey(false);
+                        
+                        if(gateArray[counter].getGateNumber() == 3){
+                            state = State::GAME_OVER;
+                        }
+                        
+                        if(!player.m_CanMoveUp){
+                            player.m_CanMoveUp = true;
+                        }
+                        if(!player.m_CanMoveDown){
+                            player.m_CanMoveDown = true;
+                        }
+                        if(!player.m_CanMoveLeft){
+                            player.m_CanMoveLeft = true;
+                        }
+                        if(!player.m_CanMoveRight){
+                            player.m_CanMoveRight = true;
+                        }
                     }
                 }
                 counter ++;
@@ -341,6 +380,7 @@ int main(int argc, const char * argv[]) {
                     } else if (pickupArray[counter].returnType() == 2){
                         bulletsSpare += pickupArray[counter].gotIt();
                     } else {
+                        int num = pickupArray[counter].gotIt();
                         player.setKey(true);
                     }
                 }
@@ -396,7 +436,9 @@ int main(int argc, const char * argv[]) {
             //Draw the gate
             counter = 0;
             for(gateIterator = gateArray.begin(); gateIterator != gateArray.end(); gateIterator++){
-                window.draw(gateArray[counter].getSprite());
+                if(!gateArray[counter].isGateOpen()){
+                     window.draw(gateArray[counter].getSprite());
+                }
                 counter++;
             }
           

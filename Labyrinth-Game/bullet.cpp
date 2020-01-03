@@ -1,16 +1,9 @@
-//
-//  bullet.cpp
-//  Zombie Arena
-//
-//
-
-//#include "stdafx.h" <- Visual Studio only
 #include "bullet.hpp"
 
 // The constructor
 Bullet::Bullet()
 {
-    m_BulletShape.setSize(sf::Vector2f(2, 2));
+    m_BulletShape.setSize(Vector2f(2, 2));
 }
 
 void Bullet::shoot(float startX, float startY,

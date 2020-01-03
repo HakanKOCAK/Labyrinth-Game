@@ -12,6 +12,10 @@ Sprite Gate::getSprite()
     return m_Sprite;
 }
 
+FloatRect Gate::getPosition(){
+    return m_Sprite.getGlobalBounds();
+}
+
 void Gate::setPosition(int x, int y){
     m_Sprite.setPosition(x, y);
 }

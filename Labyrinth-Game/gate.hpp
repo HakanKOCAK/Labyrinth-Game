@@ -23,6 +23,9 @@ public:
     // Send a copy of the sprite to main
     Sprite getSprite();
     
+    // Where is the wall
+    FloatRect getPosition();
+    
     void setPosition(int x, int y);
     
     void setGateNumber(int num);
