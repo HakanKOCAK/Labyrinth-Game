@@ -10,7 +10,7 @@ class Player
 {
 private:
     const float HEALTH = 100;
-    const float SPEED = 200;
+    const float SPEED = 250;
     
     // Where is the player
     Vector2f m_Position;
@@ -49,6 +49,7 @@ public:
     bool m_CanMoveDown = true;
     bool m_CanMoveRight = true;
     
+    RectangleShape rect;
     
     void spawn(Vector2f resolution, int tileSize);
     

@@ -214,22 +214,26 @@ int main(int argc, const char * argv[]) {
         {
             int counter = 0;
             for(wallIterator = wallArray.begin(); wallIterator != wallArray.end(); wallIterator++){
-                if (player.getPosition().intersects(wallArray[counter].getPosition())){
+                if (player.rect.getGlobalBounds().intersects(wallArray[counter].getPosition())){
                     //Up
                     if (player.m_Direction == 1){
                         player.m_CanMoveUp = false;
+                        player.rect.move(0, 1);
                     }
                     //Down
                     else if (player.m_Direction == 2){
                         player.m_CanMoveDown = false;
+                        player.rect.move(0, -1);
                     }
                     //Left
                     else if (player.m_Direction == 3){
                         player.m_CanMoveLeft = false;
+                        player.rect.move(1, 0);
                     }
                     //Right
                     else if (player.m_Direction == 4){
                         player.m_CanMoveRight = false;
+                        player.rect.move(-1, 0);
                     }
                 }
                 counter ++;
@@ -465,6 +469,7 @@ int main(int argc, const char * argv[]) {
             
             // Draw the player
             window.draw(player.getSprite());
+            window.draw(player.rect);
             
             //Draw the crosshair
             window.draw(spriteCrosshair);

@@ -8,7 +8,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     //Surround the arena
     while(counter < 27){
-        wall.setPosition(0, 0 + counter * 100);
+        wall.setPosition(50, 50 + counter * 100);
         wallArray.push_back(wall);
         
         counter++;
@@ -16,7 +16,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while(counter < 21){
-        wall.setPosition( 100 + 100 * counter, 2600);
+        wall.setPosition( 150 + 100 * counter, 2650);
         wallArray.push_back(wall);
         
         counter++;
@@ -24,7 +24,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while(counter < 26){
-        wall.setPosition(2100, 0 + counter * 100);
+        wall.setPosition(2150, 50 + counter * 100);
         wallArray.push_back(wall);
         
         counter++;
@@ -32,7 +32,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while(counter < 18){
-        wall.setPosition( 300 + 100 * counter,0);
+        wall.setPosition( 350 + 100 * counter,+50);
         wallArray.push_back(wall);
         
         counter++;
@@ -41,7 +41,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     //Gate3
     counter = 0;
     while(counter < 2){
-        gate.setPosition( 100 + 100 * counter, 0);
+        gate.setPosition( 150 + 100 * counter, +50);
         gate.setGateNumber(3);
         gateArray.push_back(gate);
         
@@ -51,7 +51,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     //Inside walls
     counter = 0;
     while(counter < 8){
-        wall.setPosition(100 * counter, 2200);
+        wall.setPosition(50 + 100 * counter, 2250);
         wallArray.push_back(wall);
         
         counter++;
@@ -59,7 +59,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while (counter < 3){
-        wall.setPosition(700 , 2100 - counter * 100);
+        wall.setPosition(750 , 2150 - counter * 100);
         wallArray.push_back(wall);
         
         counter++;
@@ -67,9 +67,9 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while (counter < 10){
-        wall.setPosition(1000 , 2500 - counter * 100);
+        wall.setPosition(1050 , 2550 - counter * 100);
         wallArray.push_back(wall);
-        wall.setPosition(1100 , 2500 - counter * 100);
+        wall.setPosition(1150 , 2550 - counter * 100);
         wallArray.push_back(wall);
         
         counter++;
@@ -77,7 +77,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while (counter < 2){
-        wall.setPosition(1400 , 2500 - counter * 100);
+        wall.setPosition(1450 , 2550 - counter * 100);
         wallArray.push_back(wall);
         
         counter++;
@@ -85,10 +85,10 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while (counter < 6){
-        wall.setPosition(1500 + counter * 100 , 2100);
+        wall.setPosition(1550 + counter * 100 , 2150);
         wallArray.push_back(wall);
         
-        wall.setPosition(1500 + counter * 100 , 2000);
+        wall.setPosition(1550 + counter * 100 , 2050);
         wallArray.push_back(wall);
         
         counter++;
@@ -97,10 +97,10 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     counter = 0;
     while (counter < 2){
         
-        wall.setPosition(1500 + counter * 100, 1900);
+        wall.setPosition(1550 + counter * 100, 1950);
         wallArray.push_back(wall);
         
-        wall.setPosition(1500 + counter * 100, 1800);
+        wall.setPosition(1550 + counter * 100, 1850);
         wallArray.push_back(wall);
         
         counter++;
@@ -108,7 +108,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while (counter < 5){
-        wall.setPosition(counter * 100 , 1900);
+        wall.setPosition(50 + counter * 100 , 1950);
         wallArray.push_back(wall);
         
         counter++;
@@ -116,7 +116,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while (counter < 4){
-        wall.setPosition(700 , 1300 + counter * 100);
+        wall.setPosition(750 , 1350 + counter * 100);
         wallArray.push_back(wall);
         
         counter++;
@@ -124,7 +124,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while (counter < 4){
-        wall.setPosition(400 , 1300 + counter * 100);
+        wall.setPosition(450 , 1350 + counter * 100);
         wallArray.push_back(wall);
         
         counter++;
@@ -132,7 +132,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while (counter < 13){
-        wall.setPosition(counter * 100 , 1300);
+        wall.setPosition(50 + counter * 100 , 1350);
         wallArray.push_back(wall);
         
         counter++;
@@ -141,7 +141,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     //Gate1
     counter = 0;
     while (counter < 2){
-        gate.setPosition(1300 + counter * 100 , 1300);
+        gate.setPosition(1350 + counter * 100 , 1350);
         gate.setGateNumber(1);
         gateArray.push_back(gate);
         
@@ -150,7 +150,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while (counter < 6){
-        wall.setPosition(1500 + counter * 100 , 1300);
+        wall.setPosition(1550 + counter * 100 , 1350);
         wallArray.push_back(wall);
         
         counter++;
@@ -158,7 +158,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while (counter < 4){
-        wall.setPosition(1700 + counter * 100, 1500);
+        wall.setPosition(1750 + counter * 100, 1550);
         wallArray.push_back(wall);
         
         counter++;
@@ -167,7 +167,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while (counter < 3){
-        wall.setPosition(1800 + counter * 100, 900 );
+        wall.setPosition(1850 + counter * 100, 950 );
         wallArray.push_back(wall);
         
         counter++;
@@ -175,7 +175,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while (counter < 2){
-        wall.setPosition(1900 + counter * 100, 200 );
+        wall.setPosition(1950 + counter * 100, 250 );
         wallArray.push_back(wall);
         
         counter++;
@@ -183,7 +183,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while (counter < 2){
-        wall.setPosition(700 , 1200 - counter * 100);
+        wall.setPosition(750 , 1200 - counter * 150);
         wallArray.push_back(wall);
         
         counter++;
@@ -191,7 +191,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while (counter < 2){
-        wall.setPosition(400 , 1000 - counter * 100);
+        wall.setPosition(450 , 1050 - counter * 100);
         wallArray.push_back(wall);
         
         counter++;
@@ -199,7 +199,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while (counter < 13){
-        wall.setPosition(counter * 100 , 800);
+        wall.setPosition(50 + counter * 100 , 850);
         wallArray.push_back(wall);
         
         counter++;
@@ -207,7 +207,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while (counter < 3){
-        wall.setPosition(1000 + counter * 100, 1000);
+        wall.setPosition(1050 + counter * 100, 1050);
         wallArray.push_back(wall);
         
         counter++;
@@ -215,7 +215,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while (counter < 3){
-        wall.setPosition(1000 + counter * 100, 900);
+        wall.setPosition(1050 + counter * 100, 950);
         wallArray.push_back(wall);
         
         counter++;
@@ -223,7 +223,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while (counter < 2){
-        wall.setPosition(1200 , 700 - counter * 100);
+        wall.setPosition(1250 , 750 - counter * 100);
         wallArray.push_back(wall);
         
         counter++;
@@ -231,7 +231,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while (counter < 6){
-        wall.setPosition(1200 + counter * 100, 500 );
+        wall.setPosition(1250 + counter * 100, 550 );
         wallArray.push_back(wall);
         
         counter++;
@@ -240,7 +240,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     //Gate2
     counter = 0;
     while (counter < 2){
-        gate.setPosition(1500 , 600 + counter * 100);
+        gate.setPosition(1550 , 650 + counter * 100);
         gate.setGateNumber(2);
         gateArray.push_back(gate);
     
@@ -250,7 +250,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while (counter < 5){
-        wall.setPosition(1500  , 1200 - counter * 100);
+        wall.setPosition(1550  , 1250 - counter * 100);
         wallArray.push_back(wall);
         
         counter++;
@@ -258,7 +258,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while (counter < 3){
-        wall.setPosition(1500, counter * 100);
+        wall.setPosition(1550, 50 + counter * 100);
         wallArray.push_back(wall);
         
         counter++;
@@ -266,7 +266,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while (counter < 3){
-        wall.setPosition(1000, counter * 100 );
+        wall.setPosition(1050, 50 + counter * 100 );
         wallArray.push_back(wall);
         
         counter++;
@@ -274,7 +274,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while (counter < 3){
-        wall.setPosition(800 , 700 - counter * 100);
+        wall.setPosition(850 , 700 - counter * 150);
         wallArray.push_back(wall);
         
         counter++;
@@ -282,7 +282,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while (counter < 2){
-        wall.setPosition(300 , 700 - counter * 100);
+        wall.setPosition(350 , 750 - counter * 150);
         wallArray.push_back(wall);
         
         counter++;
@@ -290,7 +290,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while (counter < 4){
-        wall.setPosition(500 , 0 + counter * 100);
+        wall.setPosition(550 , 0 + counter * 150);
         wallArray.push_back(wall);
         
         counter++;
@@ -298,7 +298,7 @@ void createWallsAndGates(std::vector<Wall> &wallArray, std::vector<Gate> &gateAr
     
     counter = 0;
     while (counter < 3){
-        wall.setPosition(300 + counter * 100, 0 );
+        wall.setPosition(350 + counter * 100, 50 );
         wallArray.push_back(wall);
         
         counter++;

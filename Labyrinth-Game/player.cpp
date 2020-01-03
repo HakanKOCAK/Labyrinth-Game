@@ -11,12 +11,16 @@ Player::Player(){
     // Set the origin of the sprite to the centre,
     // for smooth rotation
     m_Sprite.setOrigin(39.5f, 60.0f);
+    
+    rect.setSize(Vector2f(79.0f, 120.0f));
+    rect.setPosition(300, 2500);
+    rect.setOrigin(39.5f, 60.0f);
 }
 
 void Player::spawn(Vector2f resolution, int tileSize) {
     // Place the player to the left bottom corner of the arena
     m_Position.x = 300;
-    m_Position.y = 2400;
+    m_Position.y = 2500;
     
     // Remember how big the tiles are in this arena
     m_TileSize = tileSize;
@@ -69,6 +73,7 @@ int Player::getHealth(){
 
 void Player::update(Vector2i mousePosition){
     m_Sprite.setPosition(m_Position);
+    rect.setPosition(m_Position.x, m_Position.y);
     
     // Calculate the angle the player is facing
     //float angle = (atan2(mousePosition.y - m_Resolution.y / 2,mousePosition.x - m_Resolution.x / 2) * 180) / 3.141;
@@ -103,6 +108,7 @@ void Player::updateMovement(float elapsedTime){
     if(Keyboard::isKeyPressed(Keyboard::W)){
         if(m_CanMoveUp){
             m_Position.y -= m_Speed * elapsedTime;
+            rect.move(0, -m_Speed*elapsedTime);
             m_Direction = 1;
             m_CanMoveUp = true;
             m_CanMoveDown = true;
@@ -112,6 +118,7 @@ void Player::updateMovement(float elapsedTime){
     }else if(Keyboard::isKeyPressed(Keyboard::S)){
         if(m_CanMoveDown){
             m_Position.y += m_Speed * elapsedTime;
+            rect.move(0, m_Speed*elapsedTime);
             m_Direction = 2;
             m_CanMoveUp = true;
             m_CanMoveDown = true;
@@ -121,6 +128,7 @@ void Player::updateMovement(float elapsedTime){
     }else if(Keyboard::isKeyPressed(Keyboard::A)){
         if(m_CanMoveLeft){
             m_Position.x -= m_Speed * elapsedTime;
+            rect.move(-m_Speed*elapsedTime, 0);
             m_Direction = 3;
             m_CanMoveUp = true;
             m_CanMoveDown = true;
@@ -130,6 +138,7 @@ void Player::updateMovement(float elapsedTime){
     }else if(Keyboard::isKeyPressed(Keyboard::D)){
         if(m_CanMoveRight){
             m_Position.x += m_Speed * elapsedTime;
+            rect.move(m_Speed*elapsedTime, 0);
             m_Direction = 4;
             m_CanMoveUp = true;
             m_CanMoveDown = true;
