@@ -89,6 +89,7 @@
 		398DDD3A23BF0CB300681E5D /* playerEntity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = playerEntity.hpp; sourceTree = "<group>"; };
 		398DDD3C23BF120500681E5D /* gateAndWall.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gateAndWall.cpp; sourceTree = "<group>"; };
 		398DDD3D23BF120500681E5D /* gateAndWall.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = gateAndWall.hpp; sourceTree = "<group>"; };
+		39BBBD9623BF5CB90052C50C /* bloodsplat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bloodsplat.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +184,7 @@
 		398DDD0523BD619800681E5D /* graphics */ = {
 			isa = PBXGroup;
 			children = (
+				39BBBD9623BF5CB90052C50C /* bloodsplat.png */,
 				398DDD2C23BED9D300681E5D /* enemy.png */,
 				398DDD2923BE9CAF00681E5D /* ammo_crate.png */,
 				398DDD2823BE999200681E5D /* key.png */,

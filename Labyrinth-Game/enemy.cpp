@@ -31,7 +31,7 @@ bool Enemy::hit(){
     
     if (m_Health < 0){
         // dead
-        m_Sprite.setTexture(TextureHolder::GetTexture("../Resources/graphics/blood.png"));
+        m_Sprite.setTexture(TextureHolder::GetTexture("../Resources/graphics/bloodsplat.png"));
         return true;
     }
     

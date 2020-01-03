@@ -708,9 +708,7 @@ int main(int argc, const char * argv[]) {
             
             // Draw the enemies
             for (int i = 0; i < numOfEnemies; i++) {
-                if(enemies[i].getHealth() > 0){
-                    window.draw(enemies[i].getSprite());
-                }
+                 window.draw(enemies[i].getSprite());
             }
             
             for (int i = 0; i < 100; i++) {
