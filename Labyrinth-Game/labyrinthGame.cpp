@@ -256,7 +256,14 @@ int main(int argc, const char * argv[]) {
                     }
                     
                     if(player.doHaveAKey() && Keyboard::isKeyPressed(Keyboard::Key::F)){
-                        gateArray[counter].openTheGate();
+                        
+                        int gateNum = gateArray[counter].getGateNumber();
+                        int newCounter = 0;
+                        for(gateIterator = gateArray.begin(); gateIterator != gateArray.end(); gateIterator++){
+                            if(gateArray[newCounter].getGateNumber() == gateNum){
+                                gateArray[newCounter].openTheGate();
+                            }
+                        }
                         player.setKey(false);
                         
                         if(gateArray[counter].getGateNumber() == 3){
