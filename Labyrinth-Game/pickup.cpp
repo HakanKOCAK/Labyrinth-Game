@@ -1,8 +1,3 @@
-//
-//  pickup.cpp
-//  Zombie Arena
-//
-
 #include "pickup.hpp"
 #include "textureHolder.hpp"
 

@@ -34,6 +34,8 @@ int main(int argc, const char * argv[]) {
     
     // Here is our clock for timing everything
     Clock clock;
+    
+    Clock clock2;
     // How long has the PLAYING state been active
     Time gameTimeTotal;
     
@@ -121,7 +123,7 @@ int main(int argc, const char * argv[]) {
     scoreText.setFillColor(Color::White);
     scoreText.setPosition(20, 0);
     
-    // Zombies remaining
+    // Enemies remaining
     Text enemiesRemainingText;
     enemiesRemainingText.setFont(font);
     enemiesRemainingText.setCharacterSize(55);
@@ -146,6 +148,20 @@ int main(int argc, const char * argv[]) {
     ammoText.setCharacterSize(55);
     ammoText.setFillColor(Color::White);
     ammoText.setPosition(200, resolution.y-200);
+    
+    
+    bool drawPressF = false;
+    // press F to open the door
+    Text pressF;
+    pressF.setFont(font);
+    pressF.setCharacterSize(100);
+    pressF.setFillColor(Color::White);
+    
+    Time displayPressF;
+    
+    FloatRect pressFRect = pressF.getLocalBounds();
+    pressF.setOrigin(pressFRect.left+pressFRect.width/2.0f, pressFRect.top+pressFRect.height/2.0f);
+    pressF.setPosition(resolution.x/2, resolution.y/2);
     
     // Health bar
     RectangleShape healthBar;
@@ -310,6 +326,44 @@ int main(int argc, const char * argv[]) {
             }
             
             
+            for(int i=0; i<numOfEnemies; i++){
+                 counter = 0;
+                for(gateIterator = gateArray.begin(); gateIterator != gateArray.end(); gateIterator++){
+                    if (enemies[i].getPosition().intersects(gateArray[counter].getPosition()) && !gateArray[counter].isGateOpen()){
+                        //Up
+                        if (enemies[i].m_Direction == 1){
+                            enemies[i].m_CanMoveUp = false;
+                            enemies[i].m_Rect.move(0, 1);
+                            enemies[i].m_Direction = 2;
+                            enemies[i].m_GenerateRandom = false;
+                        }
+                        //Down
+                        else if (enemies[i].m_Direction == 2){
+                            enemies[i].m_CanMoveDown = false;
+                            enemies[i].m_Rect.move(0, -1);
+                            enemies[i].m_Direction = 1;
+                            enemies[i].m_GenerateRandom = false;
+                        }
+                        //Left
+                        else if (enemies[i].m_Direction == 3){
+                            enemies[i].m_CanMoveLeft = false;
+                            enemies[i].m_Rect.move(1, 0);
+                            enemies[i].m_Direction = 4;
+                            enemies[i].m_GenerateRandom = false;
+                        }
+                        //Right
+                        else if (enemies[i].m_Direction == 4){
+                            enemies[i].m_CanMoveRight = false;
+                            enemies[i].m_Rect.move(-1, 0);
+                            enemies[i].m_Direction = 3;
+                            enemies[i].m_GenerateRandom = false;
+                        }
+                    }
+                    counter ++;
+                }
+            }
+            
+            
             counter = 0;
             for(wallIterator = wallArray.begin(); wallIterator != wallArray.end(); wallIterator++){
                 if (player.getPosition().intersects(wallArray[counter].getPosition())){
@@ -340,6 +394,8 @@ int main(int argc, const char * argv[]) {
             counter = 0;
             for(gateIterator = gateArray.begin(); gateIterator != gateArray.end(); gateIterator++){
                 if (player.getPosition().intersects(gateArray[counter].getPosition()) && !gateArray[counter].isGateOpen()){
+                    
+                    displayPressF = gameTimeTotal;
                     //Up
                     if (player.m_Direction == 1){
                         player.m_CanMoveUp = false;
@@ -359,7 +415,6 @@ int main(int argc, const char * argv[]) {
                     
                     if(player.doHaveAKey() && Keyboard::isKeyPressed(Keyboard::Key::F)){
                         gateArray[counter].openTheGate();
-                        
                         player.setKey(false);
                         
                         if(gateArray[counter].getGateNumber() == 3){
@@ -546,6 +601,19 @@ int main(int argc, const char * argv[]) {
                 }
             }
             
+            //Check the collision between bullets and doors
+            for (int i = 0; i < 100; i++)
+            {
+                for (int j = 0; j < gateArray.size(); j++)
+                {
+                    if (bullets[i].isInFlight()){
+                        if (bullets[i].getPosition().intersects(gateArray[j].getPosition()) && !gateArray[j].isGateOpen()){
+                            bullets[i].stop();
+                        }
+                    }
+                }
+            }
+            
             
             int counter = 0;
             for(pickupIterator = pickupArray.begin(); pickupIterator != pickupArray.end(); pickupIterator++){
@@ -574,6 +642,9 @@ int main(int argc, const char * argv[]) {
                 std::stringstream ssAmmo;
                 std::stringstream ssScore;
                 std::stringstream ssEnemiesAlive;
+                std::stringstream ssPressF;
+                ssPressF << "Press F";
+                pressF.setString(ssPressF.str());
                 
                 // Update the ammo text
                 ssAmmo << bulletsInClip << "/" << bulletsSpare;
@@ -635,7 +706,7 @@ int main(int argc, const char * argv[]) {
                 counter++;
             }
             
-            // Draw the zombies
+            // Draw the enemies
             for (int i = 0; i < numOfEnemies; i++) {
                 if(enemies[i].getHealth() > 0){
                     window.draw(enemies[i].getSprite());
@@ -660,6 +731,10 @@ int main(int argc, const char * argv[]) {
             // Draw all the HUD elements
             window.draw(spriteAmmoIcon);
             window.draw(ammoText);
+            
+            if (gameTimeTotal.asMilliseconds() - displayPressF.asMilliseconds() < 3000 && gameTimeTotal.asMilliseconds() > 5000){
+                window.draw(pressF);
+            }
             window.draw(healthBar);
             window.draw(scoreText);
             window.draw(enemiesRemainingText);

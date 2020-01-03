@@ -29,7 +29,7 @@ public:
     // Call this at the end of every game
     void resetPlayerStats();
     
-    // Handle the player getting hit by a zombie
+    // Handle the player getting hit by a enemy
     bool hit(Time timeHit);
     
     // How long ago was the player last hit
